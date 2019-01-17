@@ -73,3 +73,4 @@ gem 'rolify'
 gem 'mini_racer', platforms: :ruby
 gem 'react_on_rails', '11.1.4'
 gem 'bulma-rails', "~> 0.7.2"
+gem 'faker'
