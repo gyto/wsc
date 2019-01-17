@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :orders_params, only %i[new create]
 
   def new
     # @catalog = Catalog.find(params[:id])
