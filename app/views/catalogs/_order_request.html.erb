@@ -1,0 +1,29 @@
+<%= form_for [@catalog, @user, Order.new], url: new_catalog_order_path(@catalog) do |f| %>
+
+  <div class="field">
+    <%= f.label :print_type, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :print_type, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :media, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :media, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :billing_type, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :billing_type, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit 'Submit', class: 'button is-link' %>
+    </div>
+  </div>
+<% end %>

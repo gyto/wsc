@@ -10,8 +10,9 @@
   </div>
   <div class="column">
     <h1 class="is-size-2"><%= @catalog.name %></h1>
+    <span class="tag is-info is-medium">Price: <%= number_to_currency(@catalog.price) %></span>
     <p class="content"><strong class="content is-small">Description:</strong><br/><%= @catalog.description %></p>
 
-
+    <%= render 'catalogs/order_request' %>
   </div>
 </div>

@@ -22,5 +22,13 @@ Rails.application.routes.draw do
   root 'catalogs#index'
 
   # Catalog Link
-  resources :catalogs
+  resources :catalogs do
+    resources :orders, only: %i[new crate]
+    collection do
+      put :collection
+    end
+  end
+
+  # Thank you page
+  get '/thank-you', to: 'static_pages#thank_you_page', as: :thank_you_page
 end
