@@ -1,0 +1,17 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to @catalog.name, '' %></li>
+  </ul>
+</nav>
+<div class="columns">
+  <div class="column">
+    <%= image_tag @catalog.image %>
+  </div>
+  <div class="column">
+    <h1 class="is-size-2"><%= @catalog.name %></h1>
+    <p class="content"><strong class="content is-small">Description:</strong><br/><%= @catalog.description %></p>
+
+
+  </div>
+</div>

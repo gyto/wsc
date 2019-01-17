@@ -1,4 +1,14 @@
 <% content_for :content do %>
 
-<% end %> %>
+  <%= render 'layouts/header' %>
+
+  <section class="section">
+    <div class="container">
+      <%= yield %>
+    </div>
+  </section>
+
+  <%= render 'layouts/footer' %>
+
+<% end %>
 <%= render template: 'layouts/application' %>

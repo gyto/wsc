@@ -70,5 +70,6 @@ gem 'rails_admin', '~> 1.3'
 gem 'rolify'
 
 # Custom Gems
-gem 'react_on_rails', '11.1.4'
 gem 'mini_racer', platforms: :ruby
+gem 'react_on_rails', '11.1.4'
+gem 'bulma-rails', "~> 0.7.2"

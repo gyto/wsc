@@ -1,0 +1,40 @@
+<% flash.each do |key, value|%>
+  <script>
+    new Noty({
+      type: 'information',
+      text: '<%= value %>',
+      timeout: 5000,
+      layout: 'bottomRight'
+    }).show();
+  </script>
+<% end %>
+<% if flash[:success] %>
+  <script>
+    new Noty({
+      type: 'success',
+      text: '<%= flash[:success] %>',
+      timeout: 5000,
+      layout: 'bottomRight'
+    }).show();
+  </script>
+<% end %>
+<% if flash[:message] %>
+  <script>
+    new Noty({
+      type: 'warning',
+      text: '<%= flash[:message] %>',
+      timeout: 5000,
+      layout: 'bottomRight'
+    }).show();
+  </script>
+<% end %>
+<% if flash[:error] %>
+  <script>
+    new Noty({
+      type: 'error',
+      text: '<%= flash[:error] %>',
+      timeout: 5000,
+      layout: 'bottomRight'
+    }).show();
+  </script>
+<% end %>

@@ -10,6 +10,14 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+// Bulma framework
+@import "bulma";
+
+// Noty framework
+@import "../../../node_modules/noty/src/noty.scss";
+@import "../../../node_modules/noty/src/themes/mint.scss";
+
+// Common css
+@import "common";

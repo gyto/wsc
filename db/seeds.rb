@@ -16,3 +16,5 @@ admin.password = 'password'
 admin_role = Role.find_by_name('admin')
 admin.roles << admin_role
 admin.save!
+
+load(Rails.root.join('db', 'seeds', "catalogs.rb"))
