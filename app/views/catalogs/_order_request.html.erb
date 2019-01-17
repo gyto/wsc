@@ -1,4 +1,4 @@
-<%= form_for [@catalog, @user, Order.new], url: new_catalog_order_path(@catalog) do |f| %>
+<%= form_for [@catalog, @user, @catalog.orders.new] do |f| %>
 
   <div class="field">
     <%= f.label :print_type, class: 'label' %>
