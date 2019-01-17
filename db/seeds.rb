@@ -1,4 +1,6 @@
 # Create Roles
+Role.destroy_all
+
 role = Role.new
 role.name = 'admin'
 role.save!
