@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
 
   def new
-    # @catalog = Catalog.find(params[:id])
     @order = Order.new
+    @catalog = Catalog.find(params[:id])
   end
 
   def create
