@@ -6,9 +6,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(orders_params)
     @catalog = Catalog.find(params[:catalog_id])
-    @user = User.find(params[:user_id])
+    merge_order = orders_params.merge(catalog: @catalog)
+    @order = current_user.orders.build(merge_order)
+#     @order = Order.new(merge_order)
+#     @user = User.find(params[:user_id])
 
     if @order.save
       redirect_to thank_you_page_path
