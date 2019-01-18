@@ -1,4 +1,4 @@
-# frozen_string_literal: true.
+# frozen_string_literal: true
 class CatalogsController < ApplicationController
   layout 'base_layout'
   load_and_authorize_resource
