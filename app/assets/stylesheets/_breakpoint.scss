@@ -24,6 +24,7 @@ $breakpoints : (
             unquote($raw-query),
             inspect($raw-query)
     );
+    
     @media only screen and #{$query} {
       @content;
     }
