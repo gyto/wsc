@@ -28,5 +28,4 @@ class OrdersController < ApplicationController
                                   :billing_type,
                                   :content)
   end
-
 end
