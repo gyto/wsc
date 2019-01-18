@@ -1,0 +1,66 @@
+<%= form_for ([@catalog, Order.new]) do |f| %>
+
+  <div class="columns">
+    <div class="column">
+
+      <div class="control">
+        <div class="field">
+          <%= f.label :print_type, class: 'label' %>
+          <div class="select">
+            <%= f.select(:print_type,
+                         print_type,
+                         {include_blank: 'Select Printing Type'},
+                         {required: true}) %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <div class="field">
+        <%= f.label :billing_type, class: 'label' %>
+        <div class="select">
+          <%= f.select(:billing_type,
+                       billing_type,
+                       {include_blank: 'Select Billing Type'},
+                       {required: true}) %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :qty, 'Quantity', class: 'label' %>
+    <div class="control">
+      <%= f.number_field :qty,
+                         class: 'input',
+                         required: true,
+                         placeholder: 'e.g. 100'
+      %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :content, class: 'label' %>
+    <%= f.text_area :content,
+                    class: 'textarea',
+                    placeholder: 'e.g. Awesome Print',
+                    required: true
+    %>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <% if @user.account.nil? %>
+        <button role="button" class="button is-link" title="Please fill out account information" disabled>
+          Submit Request
+        </button>
+      <% else %>
+        <%= f.submit 'Submit Request', class: 'button is-link' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

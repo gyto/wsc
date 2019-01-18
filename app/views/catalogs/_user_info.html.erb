@@ -1,0 +1,49 @@
+<% if @user.account.nil? %>
+
+  <article class="message is-danger">
+    <div class="message-body">
+      <p class="content has-text-centered">To order, please fill out account information</p>
+      <div class="buttons is-centered">
+        <%= link_to 'My Account', '', class: 'button' %>
+      </div>
+    </div>
+  </article>
+
+<% else %>
+
+  <article class="message is-link">
+    <div class="message-body">
+      <table class="user-info">
+        <tr>
+          <td><strong>Name</strong></td>
+          <td><%= @user.account.first_name %>
+            <% if @user.account.middle_name.present? %><%= @user.account.middle_name %>
+            <% end %> <%= @user.account.last_name %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Job Title & Dep</strong></td>
+          <td>
+            <% if @user.account.job_title.present? %>
+              <%= @user.account.job_title %>
+            <% end %>
+            <% if @user.account.department.present? && @user.account.department.present? %> -
+            <% end %>
+            <% if @user.account.department.present? %>
+              <%= @user.account.department %>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>Address</strong></td>
+          <td><%= @user.account.address1 %>
+            <% if @user.account.address2.present? %><%= @user.account.address2 %>
+            <% end %><br/><%= @user.account.city %> <%= @user.account.state %> <%= @user.account.zip_code %></td>
+        </tr>
+      </table>
+    </div>
+  </article>
+
+<% end %>
+

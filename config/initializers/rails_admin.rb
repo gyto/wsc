@@ -25,6 +25,34 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  config.model Order do
+    edit do
+      field :status, :enum do
+        enum do
+          ['In Progress', 'Payment Required', 'Shipped', 'Delivered']
+        end
+      end
+      field :print_type, :enum do
+        required true
+        enum do
+          %w[Print Engraving]
+        end
+      end
+      field :billing_type, :enum do
+        required true
+        enum do
+          ['Pay In Full', 'Payment On Delivery']
+        end
+      end
+      field :qty do
+        required true
+      end
+      field :content do
+        required true
+      end
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory

@@ -12,3 +12,10 @@ Williams Specialty Company is a company that engraves on many different types of
   - Setting up an account for billing
     - Or payment on delivery with at least a 10% deposit  
   - Specific arrangements for the customers need 
+
+
+## TODO:
+
+- Admin create a catalog list
+- User need to crate an order
+- Translation i18n
