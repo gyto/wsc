@@ -1,3 +1,11 @@
+addons:
+  postgresql: 9.6
+before_script:
+  - psql -c 'create database wsc_test;' -U postgres
+dist: trusty
 language: ruby
 rvm:
- - 2.4.0
+  - 2.4.0
+script:
+  - bundle exec rake db:migrate RAILS_ENV=test
+  - bundle exec rake db:seed
