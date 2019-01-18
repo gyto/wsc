@@ -13,7 +13,9 @@ Rails.application.routes.draw do
                  registrations: 'registrations'
              }
 
-  resources :users
+  resources :users do
+    resources :accounts, only: %i[edit update]
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'hello_world', to: 'hello_world#index'
@@ -23,10 +25,10 @@ Rails.application.routes.draw do
 
   # Catalog Link
   resources :catalogs do
-    resources :orders, only: %i[new crate]
-    collection do
-      put :collection
-    end
+    resources :orders, only: %i[new create]
+    # collection do
+    #   put :collection
+    # end
   end
 
   # Thank you page

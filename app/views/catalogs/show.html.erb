@@ -6,13 +6,21 @@
 </nav>
 <div class="columns">
   <div class="column">
-    <%= image_tag @catalog.image %>
+    <figure class="image image-rounded">
+      <%= image_tag "#{@catalog.image}/660x660" %>
+    </figure>
   </div>
   <div class="column">
     <h1 class="is-size-2"><%= @catalog.name %></h1>
-    <span class="tag is-info is-medium">Price: <%= number_to_currency(@catalog.price) %></span>
+    <span class="content tag is-info is-medium">Price: <%= number_to_currency(@catalog.price) %></span>
     <p class="content"><strong class="content is-small">Description:</strong><br/><%= @catalog.description %></p>
 
-    <%= render 'catalogs/order_request' %>
+    <div class="box">
+      <h2 class="is-size-3">Printing Request</h2>
+
+      <%= render 'catalogs/user_info' %>
+
+      <%= render 'catalogs/order_request' %>
+    </div>
   </div>
 </div>

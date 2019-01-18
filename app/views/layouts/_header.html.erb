@@ -11,9 +11,7 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Home
-      </a>
+      <%= link_to 'Home', root_path, class: 'navbar-item' %>
 
       <a class="navbar-item">
         About Us
@@ -33,9 +31,14 @@
             <%= link_to '<strong>My Account</strong>'.html_safe, '', class: 'button is-primary' %>
             <%= link_to 'Log Out', destroy_user_session_path, :method => :delete, class: 'button is-light' %>
           <% else %>
-            <%= link_to '<strong>Sign up</strong>'.html_safe, new_registration_path(resource_name), class: 'button is-primary' %>
+            <%= link_to '<strong>Sign up</strong>'.html_safe, new_user_registration_path, class: 'button is-primary' %>
             <%= link_to 'Log In', new_user_session_path, class: 'button is-light' %>
           <% end %>
+
+          <a href="https://github.com/GYTO/wsc" target="_blank" class="button">
+            <span class="icon is-small"><i class="fab fa-github"></i></span>
+            <span>GitHub</span>
+          </a>
 
         </div>
       </div>

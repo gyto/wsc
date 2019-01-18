@@ -2,3 +2,36 @@
   font-size: 28px;
   font-family: 'Anton', sans-serif;
 }
+
+.thank-you-page {
+  padding: 50px 0 100px;
+  @include break(sm) {
+    padding: 100px 0 200px;
+  }
+}
+
+.thank-you {
+  font-family: 'Anton', sans-serif;
+  font-size: 50px;
+  @include break(sm) {
+    font-size: 100px;
+  }
+}
+
+.image-rounded {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.user-info {
+  width: 100%;
+  tr {
+    td:first-child {
+      text-align: right;
+      padding-right: 5px;
+    }
+    td:last-child {
+      padding-left: 5px;
+    }
+  }
+}

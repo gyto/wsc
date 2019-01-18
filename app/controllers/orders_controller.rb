@@ -2,29 +2,31 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @catalog = Catalog.find(params[:id])
   end
 
   def create
+    @order = Order.new(orders_params)
     @catalog = Catalog.find(params[:catalog_id])
-    merge_order = orders_params.merge(catalog: @catalog)
-    @order = current_user.orders.build(merge_order)
-#     @order = Order.new(merge_order)
-#     @user = User.find(params[:user_id])
 
-    if @order.save
+    # Oh Well this is something that Ruby doesn't like
+    @order.catalog = @catalog
+    @order.user_id = current_user.id
+
+    if @order.save!
       redirect_to thank_you_page_path
+    else
+      flash[:error]
+      redirect_to catalog_path(@catalog)
     end
   end
 
   private
 
   def orders_params
-    params.require(:order).permit(
-        :print_type,
-        :media,
-        :billing_type
-    )
+    params.require(:order).permit(:print_type,
+                                  :qty,
+                                  :billing_type,
+                                  :content)
   end
 
 end

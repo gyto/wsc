@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  def thank_you
+  layout 'base_layout'
 
-  end
+  def thank_you; end
 end

@@ -6,8 +6,15 @@
     <title><%= content_for?(:title) ? yield(:title) : 'WSC' %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%# Font Family Anton %>
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+    <%# Font Awesome %>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG" crossorigin="anonymous">
+
+    <%# Noty JS lib %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
