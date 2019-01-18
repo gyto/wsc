@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 class OrdersController < ApplicationController
-
   def new
     @order = Order.new
   end
@@ -28,5 +28,4 @@ class OrdersController < ApplicationController
                                   :billing_type,
                                   :content)
   end
-
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # User Profile Setup
   devise_for :users,
              path: '',
