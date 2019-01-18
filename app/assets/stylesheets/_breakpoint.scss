@@ -28,6 +28,7 @@ $breakpoints : (
     @media only screen and #{$query} {
       @content;
     }
+      
   } @else {
     @error 'No value found for `#{$breakpoint}`. '
   }
