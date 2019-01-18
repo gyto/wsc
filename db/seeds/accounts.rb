@@ -1,3 +1,4 @@
+# frozen_string_literal: true.
 # Create Admin Users
 User.destroy_all
 
