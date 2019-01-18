@@ -1,3 +1,5 @@
+<%= react_component('CatalogShow', props: {price: @catalog.price}) %>
+
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li><%= link_to 'Home', root_path %></li>
@@ -15,12 +17,30 @@
     <span class="content tag is-info is-medium">Price: <%= number_to_currency(@catalog.price) %></span>
     <p class="content"><strong class="content is-small">Description:</strong><br/><%= @catalog.description %></p>
 
-    <div class="box">
-      <h2 class="is-size-3">Printing Request</h2>
+    <% if user_signed_in? %>
+      <div class="box">
+        <h2 class="is-size-3">Printing Request</h2>
 
-      <%= render 'catalogs/user_info' %>
+        <%= render 'catalogs/user_info' %>
 
-      <%= render 'catalogs/order_request' %>
-    </div>
+        <%= render 'catalogs/order_request' %>
+      </div>
+    <% else %>
+      <article class="message is-success">
+        <div class="message-body">
+          <p class="content has-text-centered">To order this product, please sign up or login.</p>
+          <div class="buttons is-centered">
+            <div class="buttons">
+              <%= link_to '<strong>Sign up</strong>'.html_safe, new_user_registration_path, class: 'button is-primary' %>
+              <%= link_to 'Log In', new_user_session_path, class: 'button is-light' %>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% end %>
   </div>
 </div>
+
+<%= content_for :custom_js do %>
+  <%= javascript_pack_tag('catalog-show-bundle', 'data-turbolinks-track': true) %>
+<% end %>

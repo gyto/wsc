@@ -15,12 +15,21 @@
     <%# Noty JS lib %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
+    <%# Favicon %>
+    <%= render 'application/favicon' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%# Custom CSS %>
+    <%= content_for(:custom_css) %>
   </head>
 
   <body>
     <%= render 'layouts/message' %>
     <%= content_for?(:content) ? yield(:content) : yield %>
+
+    <%# Custom JS %>
+    <%= content_for(:custom_js) %>
   </body>
 </html>

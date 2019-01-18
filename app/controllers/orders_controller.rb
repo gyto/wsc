@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+# Order Controller
 class OrdersController < ApplicationController
   def new
     @order = Order.new

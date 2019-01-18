@@ -44,8 +44,9 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-# Ignore node_modules
+# Ignore folders
 node_modules/
+public/packs
 
 # Ignore JetBrains
 .idea/

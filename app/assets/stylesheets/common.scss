@@ -3,8 +3,24 @@
   font-family: 'Anton', sans-serif;
 }
 
+.login-page {
+  padding: 40px 0;
+  width: 100%;
+
+  @include break(sm) {
+    display: flex;
+    justify-content: center;
+    padding: 120px 0;
+
+    .box {
+      width: 400px;
+    }
+  }
+}
+
 .thank-you-page {
   padding: 50px 0 100px;
+
   @include break(sm) {
     padding: 100px 0 200px;
   }
@@ -13,6 +29,7 @@
 .thank-you {
   font-family: 'Anton', sans-serif;
   font-size: 50px;
+
   @include break(sm) {
     font-size: 100px;
   }

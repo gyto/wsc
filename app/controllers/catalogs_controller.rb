@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+# Catalog Controller
 class CatalogsController < ApplicationController
   layout 'base_layout'
   load_and_authorize_resource
@@ -10,6 +12,6 @@ class CatalogsController < ApplicationController
   def show
     @catalogs = Catalog.all
     @catalog = Catalog.find(params[:id])
-    @user = User.find(current_user.id)
+    current_user.present? ? @user == User.find(current_user.id) : nil
   end
 end
