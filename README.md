@@ -16,6 +16,9 @@ Williams Specialty Company is a company that engraves on many different types of
 
 ## TODO:
 
-- Admin create a catalog list
-- User need to crate an order
 - Translation i18n
+- Write Tests
+- Implement Account for the user to review orders
+  - Implement Status
+- Create Account settings
+- Log out and Log In Design
