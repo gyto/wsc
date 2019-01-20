@@ -22,3 +22,4 @@ Williams Specialty Company is a company that engraves on many different types of
   - Implement Status
 - Create Account settings
 - Log out and Log In Design
+- implement auto count for the catalog inquiry with react
