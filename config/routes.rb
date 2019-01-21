@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :accounts, only: %i[edit update]
   end
 
+  resources :accounts
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'hello_world', to: 'hello_world#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

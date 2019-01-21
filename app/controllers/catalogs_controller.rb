@@ -12,6 +12,6 @@ class CatalogsController < ApplicationController
   def show
     @catalogs = Catalog.all
     @catalog = Catalog.find(params[:id])
-    current_user.present? ? @user == User.find(current_user.id) : nil
+    current_user.present? ? @user = User.find(current_user.id) : nil
   end
 end

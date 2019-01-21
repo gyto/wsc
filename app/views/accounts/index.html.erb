@@ -1,0 +1,47 @@
+<div class="box">
+  <div class="columns">
+
+    <div class="column is-3">
+      <aside class="menu">
+        <p class="menu-label">My Account</p>
+        <ul class="menu-list">
+          <li><a class="is-active">Transactions</a></li>
+          <li><a href="">Settings</a></li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="column is-9">
+      <h2 class="is-size-4">Your Transactions</h2><br/>
+      <% @user.orders.each do |o| %>
+
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-128x128">
+                <%= image_tag "#{o.catalog.image}/128x128" %>
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong><%= o.catalog.name %></strong> <small><%= o.created_at.strftime('%b %d, %Y') %></small>
+                  <br/>
+                  Content: <%= o.content %>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      <%= o.status %>
+
+
+        <%= o.catalog.id %>
+
+
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

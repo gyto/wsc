@@ -50,6 +50,8 @@ RailsAdmin.config do |config|
       field :content do
         required true
       end
+      field :user_id
+      field :catalog_id
     end
   end
 
