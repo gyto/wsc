@@ -28,6 +28,11 @@
         <div class="buttons">
 
           <% if user_signed_in? %>
+
+            <% if current_user.admin? %>
+              <%= link_to 'Admin Panel', rails_admin_path, class: 'button is-danger' %>
+            <% end %>
+
             <%= link_to '<strong>My Account</strong>'.html_safe, accounts_path, class: 'button is-primary' %>
             <%= link_to 'Log Out', destroy_user_session_path, :method => :delete, class: 'button is-light' %>
           <% else %>

@@ -14,13 +14,20 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :accounts, only: %i[edit update]
+    resources :orders, only: %i[show edit update]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :orders, only: [:show] do
+        resources :accounts, only: [:show]
+      end
+    end
   end
 
   resources :accounts
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  # get 'hello_world', to: 'hello_world#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'catalogs#index'
 

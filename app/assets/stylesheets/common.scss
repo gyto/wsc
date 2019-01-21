@@ -52,3 +52,65 @@
     }
   }
 }
+
+.ReactModal__Overlay {
+  background-color: rgba(black, 0.5) !important;
+  z-index: 999;
+}
+
+.order-receipt {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  p {
+    margin: 0 !important;
+    text-align: right;
+    padding: 3px 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    line-height: 1.2;
+    @include break(sm) {
+      height: 34px;
+    }
+  }
+  p:nth-of-type(odd) {
+    width: 50%;
+    @include break(sm) {
+      flex: 0 0 75%;
+      max-width: 75%;
+    }
+  }
+  p:nth-of-type(even) {
+    width: 50%;
+    @include break(sm) {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+  }
+  @include break(sm) {
+    width: 380px;
+  }
+}
+
+.order-border-top {
+  border-top: 2px solid gray;
+}
+
+.invoice-modal {
+  @include break (lg) {
+    width: auto;
+  }
+}
+
+@include break(lg) {
+  .invoice-note { display: none; }
+}
+
+@media print {
+  .invoice-note { display: none; }
+}
+
+.section {
+  min-height: 80vh;
+}

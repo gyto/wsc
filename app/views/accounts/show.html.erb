@@ -1,1 +1,79 @@
-<div class=""></div>
+<div class="tabs is-boxed">
+  <ul>
+    <li>
+      <%= link_to accounts_path do %>
+        <span class="icon is-small"><i class="far fa-shopping-basket"></i></span>
+        <span>Orders</span>
+      <% end %>
+    </li>
+    <li class="is-active">
+      <%= link_to account_path(@user.account.id) do %>
+        <span class="icon is-small"><i class="far fa-cogs"></i></span>
+        <span>Settings</span>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div>
+
+  <% user_account = @user.account.first_name || @user.account.middle_name || @user.account.last_name %>
+
+  <% if user_account.nil? %>
+
+    <div class="thank-you-page">
+      <h1 class="thank-you has-text-centered content"><i class="fas fa-dove"></i></h1>
+      <h4 class="content is-size-5 has-text-centered">Your account information is empty</h4>
+      <div class="buttons is-centered">
+        <%= link_to 'Add information', edit_account_path(@user.account.id), class: 'button is-medium is-primary' %>
+      </div>
+    </div>
+
+  <% else %>
+    <h2 class="title is-size-4">Your Account Settings</h2>
+
+    <h4 class="is-size-6">
+      <span class="tag"><%= @user.email %></span>
+    </h4>
+
+    <br/>
+
+    <article class="message is-link">
+      <div class="message-body">
+        <table class="user-info">
+          <tr>
+            <td><strong>Name</strong></td>
+            <td><%= @user.account.first_name %>
+              <% if @user.account.middle_name.present? %><%= @user.account.middle_name %>
+              <% end %> <%= @user.account.last_name %></td>
+          </tr>
+          <% if @user.account.job_title.present? || @user.account.department.present? %>
+            <tr>
+              <td><strong>Job Title & Dept</strong></td>
+              <td>
+                <% if @user.account.job_title.present? %>
+                  <%= @user.account.job_title %>
+                <% end %>
+                <% if @user.account.department.present? && @user.account.department.present? %> -
+                <% end %>
+                <% if @user.account.department.present? %>
+                  <%= @user.account.department %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+          <tr>
+            <td><strong>Address</strong></td>
+            <td><%= @user.account.address1 %>
+              <% if @user.account.address2.present? %><%= @user.account.address2 %>
+              <% end %><br/><%= @user.account.city %> <%= @user.account.state %> <%= @user.account.zip_code %></td>
+          </tr>
+        </table>
+      </div>
+    </article>
+
+    <%= link_to 'Update Account Information', edit_account_path(@user.account.id), class: 'button is-primary' %>
+
+  <% end %>
+</div>

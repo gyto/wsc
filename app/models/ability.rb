@@ -33,8 +33,11 @@ class Ability
       can :access, :rails_admin
     elsif user.has_role? :customer
       can :manage, User, id: user.id
-    else
+      can :manage, Order
+      can :manage, Account
       can :read, Catalog
+    else
+      can :read, :all
     end
   end
 end

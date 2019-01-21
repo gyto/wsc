@@ -29,7 +29,7 @@ RailsAdmin.config do |config|
     edit do
       field :status, :enum do
         enum do
-          ['In Progress', 'Payment Required', 'Shipped', 'Delivered']
+          ['Order Under Review', 'In Progress', 'Payment Required', 'Shipped', 'Delivered']
         end
       end
       field :print_type, :enum do
@@ -43,12 +43,6 @@ RailsAdmin.config do |config|
         enum do
           ['Pay In Full', 'Payment On Delivery']
         end
-      end
-      field :qty do
-        required true
-      end
-      field :content do
-        required true
       end
       field :user_id
       field :catalog_id

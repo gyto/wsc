@@ -1,47 +1,137 @@
-<div class="box">
-  <div class="columns">
+<%= react_component('PrintInvoice', props: {}) %>
 
-    <div class="column is-3">
-      <aside class="menu">
-        <p class="menu-label">My Account</p>
-        <ul class="menu-list">
-          <li><a class="is-active">Transactions</a></li>
-          <li><a href="">Settings</a></li>
-        </ul>
-      </aside>
-    </div>
-
-    <div class="column is-9">
-      <h2 class="is-size-4">Your Transactions</h2><br/>
-      <% @user.orders.each do |o| %>
-
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-128x128">
-                <%= image_tag "#{o.catalog.image}/128x128" %>
-              </figure>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong><%= o.catalog.name %></strong> <small><%= o.created_at.strftime('%b %d, %Y') %></small>
-                  <br/>
-                  Content: <%= o.content %>
-                </p>
-              </div>
-            </div>
-          </article>
-        </div>
-      <%= o.status %>
-
-
-        <%= o.catalog.id %>
-
-
+<div class="tabs is-boxed">
+  <ul>
+    <li class="is-active">
+      <%= link_to accounts_path do %>
+        <span class="icon is-small"><i class="far fa-shopping-basket"></i></span>
+        <span>Orders</span>
       <% end %>
-    </div>
-
-  </div>
+    </li>
+    <li>
+      <%= link_to account_path(@user.account.id) do %>
+        <span class="icon is-small"><i class="far fa-cogs"></i></span>
+        <span>Settings</span>
+      <% end %>
+    </li>
+  </ul>
 </div>
 
+<div>
+  <% if @user.orders.length == 0 || @user.orders.nil? %>
+    <div class="thank-you-page">
+      <h1 class="thank-you has-text-centered content"><i class="fas fa-dove"></i></h1>
+      <h4 class="content is-size-5 has-text-centered">You didn't order anything yet</h4>
+      <div class="buttons is-centered">
+        <%= link_to 'Back To Catalog', root_path, class: 'button is-medium is-primary' %>
+      </div>
+    </div>
+
+  <% else %>
+    <div id="orders"></div>
+    <h2 class="title is-size-4">Your Transactions</h2>
+
+    <h4 class="is-size-6">
+      <% if @user.orders.length == 1 %>
+        <span class="tag">1 Order Found</span>
+      <% else %>
+        <span class="tag"><%= @user.orders.length %> Orders Found</span>
+      <% end %>
+    </h4>
+
+    <br/>
+
+    <div class="account_table_head">
+      <div class="account_table_col account_table_col--order">Order #</div>
+      <div class="account_table_col account_table_col--date">Date</div>
+      <div class="account_table_col account_table_col--catalog">Catalog</div>
+      <div class="account_table_col account_table_col--content">Billing Type/Content</div>
+      <div class="account_table_col account_table_col--status">Status</div>
+      <div class="account_table_col account_table_col--total">Total</div>
+    </div>
+
+    <% @user.orders.order('created_at DESC').each do |o| %>
+      <div class="account_table_body">
+        <div class="account_table_col account_table_col--order">
+          <small class="has-text-info">#WSC0<%= o.id %></small>
+        </div>
+        <div class="account_table_col account_table_col--date">
+          <small><%= o.created_at.strftime('%b %d, %Y') %></small>
+        </div>
+        <div class="account_table_col account_table_col--catalog account_table_catalog">
+          <figure class="image is-48x48">
+            <%= image_tag "#{o.catalog.image}/48x48", class: 'is-rounded' %>
+          </figure>
+          <div style="margin-left: 15px">
+            <p>
+              <small><%= o.catalog.name %></small>
+            </p>
+            <span class="tag"><%= number_to_currency(o.item_price) %></span></div>
+        </div>
+        <div class="account_table_col account_table_col--content">
+          <p title="<%= o.content %>">
+            <span class="tag is-dark"><%= o.billing_type %></span><br/>
+            <small><%= truncate(o.content, :length => 60) %></small>
+          </p>
+        </div>
+        <div class="account_table_col account_table_col--status">
+          <% if o.status == 'In Progress' %>
+            <span class="tag is-warning"><%= o.status %></span>
+          <% elsif o.status == 'Payment Required' %>
+            <span class="tag is-danger"><%= o.status %></span>
+          <% elsif o.status == 'Shipped' %>
+            <span class="tag is-info"><%= o.status %></span>
+          <% elsif o.status == 'Delivered' %>
+            <span class="tag is-success"><%= o.status %></span>
+          <% elsif o.status == 'Order Under Review' %>
+            <span class="tag is-primary"><%= o.status %></span>
+          <% else %>
+            <span class="tag">N/A</span>
+          <% end %>
+
+        </div>
+        <div class="account_table_col account_table_col--total">
+          <%= number_to_currency(o.total_price) %>
+        </div>
+
+        <div class="account_links">
+          <%# Dont show edit button if status is Order Under Review %>
+          <% unless o.status != 'Order Under Review' %>
+            <%= link_to '<i class="fas fa-edit"></i> Edit Order'.html_safe,
+                        edit_user_order_path(current_user.id, o),
+                        class: 'account_link'
+            %>
+          <% end %>
+
+          <%= link_to '<i class="fas fa-eye"></i> View Order'.html_safe,
+                      user_order_path(current_user.id, o),
+                      class: 'account_link'
+          %>
+
+          <button
+            data-order-number="<%= o.id %>"
+            data-user-id="<%= @user.account.id %>"
+            class="account_link account_link_print"
+          ><i class="fas fa-print"></i> Print Invoice</button>
+
+          <% if o.status == 'Payment Required' %>
+            <a
+              href="#"
+              class="account_link"
+            ><i class="fas fa-money-bill"></i> Pay for order</a>
+          <% end %>
+
+        </div>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
+
+<%= content_for :custom_js do %>
+  <%= javascript_pack_tag('print-invoice-bundle', 'data-turbolinks-track': true) %>
+<% end %>
+
+<%= content_for :custom_css do %>
+  <%= stylesheet_pack_tag 'print-invoice-bundle', media: 'all' %>
+<% end %>
