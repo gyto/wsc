@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 document.addEventListener('turbolinks:load', () => {
 
   // Get all "navbar-burger" elements
