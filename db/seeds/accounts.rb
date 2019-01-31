@@ -6,6 +6,7 @@ admin = User.new
 admin.id = 1
 admin.email = 'gyto23@gmail.com'
 admin.password = 'password'
+admin.admin = true
 admin_role = Role.find_by_name('admin')
 admin.roles << admin_role
 admin.save!

@@ -60,7 +60,9 @@
 
   <div class="field is-grouped">
     <div class="control">
-      <% if @user.account.nil? %>
+      <% user_account = @user.account.first_name || @user.account.middle_name || @user.account.last_name %>
+
+      <% if user_account.nil? %>
         <button role="button" class="button is-link" title="Please fill out account information" disabled>
           Submit Request
         </button>

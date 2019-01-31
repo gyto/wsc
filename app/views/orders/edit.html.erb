@@ -1,0 +1,75 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'My Account', accounts_path %></li>
+    <li class="is-active"><%= link_to "Order #WSC0#{@order.id}", '#' %></li>
+  </ul>
+</nav>
+<div class="box">
+  <%= form_for ([@user, @order]) do |f| %>
+    <h1 class="title is-size-3">Order #WSC0<%= @order.id %></h1>
+
+    <article class="message is-warning">
+      <div class="message-body">
+        Please note that amount of content or quantity may effect your order amount
+      </div>
+    </article>
+
+    <div class="columns">
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image">
+              <%= link_to (image_tag "#{@order.catalog.image}/300x300"), catalog_path(@order.catalog.id), target: '_blank' %>
+            </figure>
+          </div>
+          <div class="card-content">
+            <p class="is-size-4"><%= @order.catalog.name %></p>
+            <span class="tag is-link"><%= number_to_currency(@order.item_price) %> / per item</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-8">
+
+        <div class="field">
+          <div class="control">
+            <%= f.label :billing_type, class: 'label' %>
+            <%= f.text_field :billing_type, class: 'input', disabled: true %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :print_type, class: 'label' %>
+          <%= f.text_field :print_type, class: 'input', disabled: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :qty, class: 'label' %>
+          <%= f.number_field :qty,
+                             class: 'input',
+                             required: true,
+                             placeholder: 'e.g. 100',
+                             maxlength: 3,
+                             max: 100
+          %>
+        </div>
+
+        <div class="field">
+          <%= f.label :content, class: 'label' %>
+          <%= f.text_area :content,
+                           class: 'textarea',
+                           required: true
+          %>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.submit 'Update Order', class: 'button is-link' %>
+            <%= link_to 'Cancel', accounts_path, class: 'button is-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

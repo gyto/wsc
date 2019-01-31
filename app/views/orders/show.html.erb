@@ -1,0 +1,105 @@
+<%= react_component('PrintInvoice', props: {}) %>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'My Account', accounts_path %></li>
+    <li class="is-active"><%= link_to "Order #WSC0#{@order.id}", '#' %></li>
+  </ul>
+</nav>
+<div id="orders"></div>
+<div class="box">
+  <h1 class="title is-size-3">
+    Order #WSC0<%= @order.id %><br/>
+    <% if @order.status == 'In Progress' %>
+      <span class="tag is-warning"><%= @order.status %></span>
+    <% elsif @order.status == 'Payment Required' %>
+      <span class="tag is-danger"><%= @order.status %></span>
+    <% elsif @order.status == 'Shipped' %>
+      <span class="tag is-info"><%= @order.status %></span>
+    <% elsif @order.status == 'Delivered' %>
+      <span class="tag is-success"><%= @order.status %></span>
+    <% elsif @order.status == 'Order Under Review' %>
+      <span class="tag is-primary"><%= @order.status %></span>
+    <% else %>
+      <span class="tag">N/A</span>
+    <% end %>
+  </h1>
+
+  <div class="columns">
+    <div class="column is-4">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <%= link_to (image_tag "#{@order.catalog.image}/300x300"), catalog_path(@order.catalog.id), target: '_blank' %>
+          </figure>
+        </div>
+        <div class="card-content">
+          <p class="is-size-4"><%= @order.catalog.name %></p>
+          <span class="tag is-link"><%= number_to_currency(@order.item_price) %> / per item</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-8 content">
+      <p><strong>Date of Order: </strong><%= @order.created_at %><br/>
+        <strong>Billing Type: </strong><%= @order.billing_type %><br/>
+        <strong>Print Type: </strong><%= @order.print_type %><br/>
+        <strong>Content: </strong><%= @order.content %><br/>
+      </p>
+
+      <% subtotal = @order.item_price * @order.qty + (@order.content_length * 0.02) %>
+
+      <div class="order-receipt box">
+        <p>
+          <small>Item Price</small>
+        </p>
+        <p class="is-size-5"><%= number_to_currency(@order.item_price) %></p>
+        <p>
+          <small>Quantity</small>
+        </p>
+        <p class="is-size-5"><%= @order.qty %></p>
+        <p>
+          <small>Content Length (0.02 per letter)</small>
+        </p>
+        <p class="is-size-5"><%= @order.content_length %></p>
+        <p>
+          <small>Subtotal</small>
+        </p>
+        <p class="is-size-5"><%= number_to_currency(subtotal) %></p>
+        <p>
+          <small>Tax</small>
+        </p>
+        <p class="is-size-5"><%= number_to_percentage(@order.tax * 100, precision: 0) %></p>
+        <p class="order-border-top"><strong>
+          <small>Total</small>
+        </strong></p>
+        <p class="order-border-top is-size-5"><strong><%= number_to_currency(@order.total_price) %></strong></p>
+      </div>
+
+      <div class="buttons">
+        <% unless @order.status != 'Order Under Review' %>
+          <%= link_to 'Edit Order', edit_user_order_path(current_user.id, @order.id), class: 'button is-link' %>
+        <% end %>
+
+        <button
+          data-order-number="<%= @order.id %>"
+          data-user-id="<%= @user.account.id %>"
+          class="button is-info account_link_print"
+        >
+          <span class="icon"><i class="fas fa-print"> </i></span>
+          <span>Print Invoice</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= content_for :custom_js do %>
+  <%= javascript_pack_tag('print-invoice-bundle', 'data-turbolinks-track': true) %>
+<% end %>
+
+<%= content_for :custom_css do %>
+  <%= stylesheet_pack_tag 'print-invoice-bundle', media: 'all' %>
+<% end %>

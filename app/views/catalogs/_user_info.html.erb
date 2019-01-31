@@ -1,10 +1,12 @@
-<% if @user.account.nil? %>
+<% user_account = @user.account.first_name || @user.account.middle_name || @user.account.last_name %>
+
+<% if user_account.nil? %>
 
   <article class="message is-danger">
     <div class="message-body">
       <p class="content has-text-centered">To order, please fill out account information</p>
       <div class="buttons is-centered">
-        <%= link_to 'My Account', '', class: 'button' %>
+        <%= link_to 'My Account', edit_account_path(@user.account.id), class: 'button' %>
       </div>
     </div>
   </article>
@@ -21,8 +23,9 @@
             <% end %> <%= @user.account.last_name %></td>
         </tr>
 
+        <% if @user.account.job_title.present? || @user.account.department.present? %>
         <tr>
-          <td><strong>Job Title & Dep</strong></td>
+          <td><strong>Job Title & Dept</strong></td>
           <td>
             <% if @user.account.job_title.present? %>
               <%= @user.account.job_title %>
@@ -34,6 +37,7 @@
             <% end %>
           </td>
         </tr>
+        <% end %>
 
         <tr>
           <td><strong>Address</strong></td>

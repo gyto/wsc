@@ -1,0 +1,84 @@
+.account_table_head {
+  width: 100%;
+  color: gray;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  display: none;
+  @include break(lg) {
+    display: flex;
+  }
+}
+
+.account_table_col {
+  padding: 10px 8px;
+  flex: 0 0 100%;
+  @include break(sm) {
+    flex: 0 0 (100%/3);
+  }
+  @include break(lg) {
+    &--order,
+    &--total {
+      flex: 0 0 10%;
+      max-width: 10%;
+    }
+    &--status,
+    &--catalog {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+    &--content {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+    &--date {
+      flex: 0 0 15%;
+      max-width: 15%;
+    }
+  }
+}
+
+.account_table_body {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  color: #4a4a4a;
+  margin-top: 10px;
+
+}
+
+.account_table_catalog {
+  display: flex;
+  align-items: center;
+}
+
+.account_links {
+  width: 100%;
+  border-top: 1px solid #dbdbdb;
+  @include break(sm) {
+    display: flex;
+    flex: 0 0 100%;
+  }
+}
+
+.account_link {
+  display: block;
+  text-align: center;
+  padding: 6px 8px;
+  border: 0;
+  background-color: transparent;
+  font-size: 16px;
+  color: hsl(0, 0%, 21%);
+  cursor: pointer;
+  &:hover {
+    color: hsl(171, 100%, 41%);
+  }
+  @include break(sm) {
+    padding: 12px 8px;
+    flex: 1;
+  }
+}
