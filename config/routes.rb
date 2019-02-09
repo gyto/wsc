@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :accounts
-  resources :contacts, only: [:new, :create]
+  resources :contacts, only: %i[new create]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
