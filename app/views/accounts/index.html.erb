@@ -95,6 +95,15 @@
         </div>
 
         <div class="account_links">
+
+          <% unless o.paid %>
+            <%= form_tag paid_user_order_path(current_user, o.id), method: :patch, class: 'account_link to_pay' do %>
+              <%= hidden_field_tag :paid, value: true %>
+              <i class="fas fa-credit-card fa-lg"></i> Pay
+              <%= submit_tag '', class: 'account_link_btn' %>
+            <% end %>
+          <% end %>
+
           <%# Dont show edit button if status is Order Under Review %>
           <% unless o.status != 'Order Under Review' %>
             <%= link_to '<i class="fas fa-edit"></i> Edit Order'.html_safe,
@@ -112,14 +121,8 @@
             data-order-number="<%= o.id %>"
             data-user-id="<%= @user.account.id %>"
             class="account_link account_link_print"
-          ><i class="fas fa-print"></i> Print Invoice</button>
-
-          <% if o.status == 'Payment Required' %>
-            <a
-              href="#"
-              class="account_link"
-            ><i class="fas fa-money-bill"></i> Pay for order</a>
-          <% end %>
+          ><i class="fas fa-print"></i> Print Invoice
+          </button>
 
         </div>
       </div>

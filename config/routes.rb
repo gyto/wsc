@@ -14,8 +14,14 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :accounts, only: %i[edit update]
-    resources :orders, only: %i[show edit update]
+    resources :orders, only: %i[show edit update] do
+      member do
+        patch 'paid'
+      end
+    end
   end
+
+  resources :orders
 
   namespace :api do
     namespace :v1 do
@@ -26,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :accounts
+  resources :contacts, only: %i[new create]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -34,11 +41,10 @@ Rails.application.routes.draw do
   # Catalog Link
   resources :catalogs do
     resources :orders, only: %i[new create]
-    # collection do
-    #   put :collection
-    # end
   end
 
-  # Thank you page
+  # Static pages
   get '/thank-you', to: 'static_pages#thank_you_page', as: :thank_you_page
+  get '/about-us', to: 'static__pages#about_us_page', as: :about_us_page
+  get '/contact-us', to: 'static__pages#contact_us_page', as: :contact_us_page
 end

@@ -43,7 +43,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 6px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
   color: #4a4a4a;
@@ -59,6 +59,7 @@
 .account_links {
   width: 100%;
   border-top: 1px solid #dbdbdb;
+  padding: 3px;
   @include break(sm) {
     display: flex;
     flex: 0 0 100%;
@@ -74,11 +75,31 @@
   font-size: 16px;
   color: hsl(0, 0%, 21%);
   cursor: pointer;
+  position: relative;
   &:hover {
     color: hsl(171, 100%, 41%);
   }
   @include break(sm) {
     padding: 12px 8px;
     flex: 1;
+  }
+
+  &.to_pay {
+    background-color: $success;
+    border-radius: 3px;
+    color: #ffffff;
+  }
+
+  & .account_link_btn {
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 }

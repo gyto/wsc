@@ -18,7 +18,3 @@ Williams Specialty Company is a company that engraves on many different types of
 
 - Translation i18n
 - Write Tests
-- Implement Account for the user to review orders
-  - Implement Status
-- Create Account settings
-- create calculator

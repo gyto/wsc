@@ -26,6 +26,17 @@ RailsAdmin.config do |config|
   # config.show_gravatar = true
 
   config.model Order do
+    list do
+      field :paid
+      field :billing_type
+      field :status
+      field :print_type
+      field :catalog_id
+      field :created_at do
+        label 'Order Date'
+      end
+    end
+
     edit do
       field :status, :enum do
         enum do

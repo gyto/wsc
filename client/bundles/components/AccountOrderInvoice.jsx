@@ -63,13 +63,20 @@ class AccountOrderInvoice extends React.Component<Props, State> {
 
     let subtotal = order.qty * +order.item_price + (order.content_length * LETTER_PRICE);
     let finalTotal = subtotal + (subtotal * TAX);
+    let amountPaid = finalTotal * 0.10;
+    let amountDue = (order.paid)
+      ? (order.billing_type === 'Payment On Delivery'
+        ? (+order.total_price).toFixed(2)
+        : (0).toFixed(2))
+      : (+order.total_price).toFixed(2);
 
     return (
       <React.Fragment>
         <div
           ref={el => (this.componentRef = el)}
         >
-          <h2 className="title invoice-note has-text-centered">This invoice cannot be previewed on phone, only can be printed</h2>
+          <h2 className="title invoice-note has-text-centered">This invoice cannot be previewed on phone, only can be
+            printed</h2>
 
           <div className={styles.pageWrap}>
             <div className={styles.invoiceHeader}>INVOICE</div>
@@ -93,22 +100,22 @@ class AccountOrderInvoice extends React.Component<Props, State> {
               {userInfo}
               <table className={styles.invoiceMeta}>
                 <tbody>
-                  <tr>
-                    <td className={styles.invoiceMetaHead}>Invoice #</td>
-                    <td>WSC0{order.id}</td>
-                  </tr>
-                  <tr>
-                    <td className={styles.invoiceMetaHead}>Date</td>
-                    <td>{moment(order.created_at).format('MMMM Do, YYYY')}</td>
-                  </tr>
-                  <tr>
-                    <td className={styles.invoiceMetaHead}>Billing Type</td>
-                    <td>{order.billing_type}</td>
-                  </tr>
-                  <tr>
-                    <td className={styles.invoiceMetaHead}>Amount Due</td>
-                    <td>${(order.billing_type === 'Pay In Full') ? (0).toFixed(2) : (+order.total_price).toFixed(2)}</td>
-                  </tr>
+                <tr>
+                  <td className={styles.invoiceMetaHead}>Invoice #</td>
+                  <td>WSC0{order.id}</td>
+                </tr>
+                <tr>
+                  <td className={styles.invoiceMetaHead}>Date</td>
+                  <td>{moment(order.created_at).format('MMMM Do, YYYY')}</td>
+                </tr>
+                <tr>
+                  <td className={styles.invoiceMetaHead}>Billing Type</td>
+                  <td>{order.billing_type}</td>
+                </tr>
+                <tr>
+                  <td className={styles.invoiceMetaHead}>Amount Due</td>
+                  <td>${amountDue}</td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -116,65 +123,63 @@ class AccountOrderInvoice extends React.Component<Props, State> {
             <table className={styles.invoiceItem}>
 
               <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Description</th>
-                  <th>Unit Cost</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                </tr>
+              <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Unit Cost</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
               </thead>
 
               <tbody>
-                <tr className={styles.itemRow}>
-                  <td className={styles.itemName}>
-                    <figure className="image is-48x48">
-                      <img src={`${catalog.image}/48x48`} className='is-rounded'/>
-                    </figure>
-                    {catalog.name}
-                  </td>
-                  <td className={styles.description}>
-                    <strong>Print Type:</strong> {order.print_type}<br/>
-                    <strong>Content:</strong> {order.content}
-                  </td>
-                  <td>${(+order.item_price).toFixed(2)}</td>
-                  <td>{order.qty}</td>
-                  <td>${(+order.item_price * order.qty).toFixed(2)}</td>
-                </tr>
+              <tr className={styles.itemRow}>
+                <td className={styles.itemName}>
+                  <figure className="image is-48x48">
+                    <img src={`${catalog.image}/48x48`} className='is-rounded'/>
+                  </figure>
+                  {catalog.name}
+                </td>
+                <td className={styles.description}>
+                  <strong>Print Type:</strong> {order.print_type}<br/>
+                  <strong>Content:</strong> {order.content}
+                </td>
+                <td>${(+order.item_price).toFixed(2)}</td>
+                <td>{order.qty}</td>
+                <td>${(+order.item_price * order.qty).toFixed(2)}</td>
+              </tr>
 
+              <tr>
+                <td colSpan="2" className={styles.blank}/>
+                <td colSpan="2" className={styles.totalLine}>Content ($0.02/letter)</td>
+                <td className={styles.totalValue}>${(order.content_length * LETTER_PRICE).toFixed(2)}</td>
+              </tr>
+
+              <tr>
+                <td colSpan="2" className={styles.blank}/>
+                <td colSpan="2" className={styles.totalLine}>Subtotal</td>
+                <td className={styles.totalValue}>${(subtotal).toFixed(2)}</td>
+              </tr>
+
+              <tr>
+                <td colSpan="2" className={styles.blank}/>
+                <td colSpan="2" className={styles.totalLine}>Tax (8%)</td>
+                <td className={styles.totalValue}>${(subtotal * TAX).toFixed(2)}</td>
+              </tr>
+
+              {(order.billing_type !== 'Pay In Full' && order.paid) ?
                 <tr>
                   <td colSpan="2" className={styles.blank}/>
-                  <td colSpan="2" className={styles.totalLine}>Content ($0.02/letter)</td>
-                  <td className={styles.totalValue}>${(order.content_length * LETTER_PRICE).toFixed(2)}</td>
-                </tr>
+                  <td colSpan="2" className={styles.totalLine}>Amount Paid</td>
 
-                <tr>
-                  <td colSpan="2" className={styles.blank}/>
-                  <td colSpan="2" className={styles.totalLine}>Subtotal</td>
-                  <td className={styles.totalValue}>${(subtotal).toFixed(2)}</td>
-                </tr>
+                  <td className={styles.totalValue}>${(amountPaid).toFixed(2)}</td>
+                </tr> : ''}
 
-                <tr>
-                  <td colSpan="2" className={styles.blank}/>
-                  <td colSpan="2" className={styles.totalLine}>Tax (8%)</td>
-                  <td className={styles.totalValue}>${(subtotal * TAX).toFixed(2)}</td>
-                </tr>
-
-                {(order.billing_type !== 'Pay In Full') ?
-                  <tr>
-                    <td colSpan="2" className={styles.blank}/>
-                    <td colSpan="2" className={styles.totalLine}>Amount Paid</td>
-
-                    <td className={styles.totalValue}>{/*TODO: add*/}</td>
-                  </tr> : ''}
-
-                <tr>
-                  <td colSpan="2" className={styles.blank}/>
-                  <td colSpan="2" className={[styles.totalLine, styles.balance].join(' ')}>Total</td>
-                  <td className={[styles.finalTotal, styles.balance].join(' ')}>
-                  ${(finalTotal).toFixed(2)}
-                  </td>
-                </tr>
+              <tr>
+                <td colSpan="2" className={styles.blank}/>
+                <td colSpan="2" className={[styles.totalLine, styles.balance].join(' ')}>Total</td>
+                <td className={[styles.finalTotal, styles.balance].join(' ')}>${(finalTotal).toFixed(2)}</td>
+              </tr>
               </tbody>
 
             </table>
