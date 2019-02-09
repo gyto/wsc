@@ -22,12 +22,15 @@ class OrdersController < ApplicationController
     subtotal = @order.qty * item_price + content_length * 0.02
     total = subtotal + subtotal * @order.tax
 
+    update_status = @order.billing_type == 'Payment On Delivery' ? 'Payment Required' : 'Order Under Review'
+
     if @order.save!
       @order.update_attributes(
         item_price: item_price,
         total_price: total,
         content_length: content_length,
-        status: 'Order Under Review'
+        status: update_status,
+        paid: @order.billing_type != 'Payment On Delivery'
       )
       redirect_to thank_you_page_path
     else
@@ -60,7 +63,6 @@ class OrdersController < ApplicationController
         qty: @order.qty
       )
 
-
       flash[:notice] = 'Orders has been updated.'
       redirect_to accounts_path
     else
@@ -73,12 +75,29 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def paid
+    @user = current_user
+    @order = Order.find(params[:id])
+
+    total_price = @order.total_price
+    update_total = total_price - total_price * 0.10
+
+    @order.update_attributes(
+      paid: true,
+      status: 'Order Under Review',
+      total_price: update_total
+    )
+
+    redirect_to accounts_path
+  end
+
   private
 
   def order_params
     params.require(:order).permit(:print_type,
                                   :qty,
                                   :billing_type,
-                                  :content)
+                                  :content,
+                                  :paid)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_052032) do
+ActiveRecord::Schema.define(version: 2019_02_09_035232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 2019_01_23_052032) do
     t.string "image"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "comment"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "print_type"
     t.string "billing_type"
@@ -54,6 +60,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_052032) do
     t.decimal "total_price"
     t.integer "content_length"
     t.decimal "tax", default: "0.08"
+    t.boolean "paid", default: false
   end
 
   create_table "roles", force: :cascade do |t|

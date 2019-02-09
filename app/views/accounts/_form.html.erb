@@ -79,16 +79,18 @@
         <div class="field">
           <%= f.label :state, class: 'label' %>
           <div class="control">
-            <%= f.text_field :state, class: 'input', required: true %>
+            <%= f.text_field :state, class: 'input', required: true, maxlength: 2 %>
           </div>
+          <p class="help is-danger">Only 2 letters for state</p>
         </div>
       </div>
       <div class="column">
         <div class="field">
           <%= f.label :zip_code, class: 'label' %>
           <div class="control">
-            <%= f.text_field :zip_code, class: 'input', required: true %>
+            <%= f.text_field :zip_code, class: 'input', required: true, maxlength: 5 %>
           </div>
+          <p class="help is-danger">Only 5 digits</p>
         </div>
       </div>
     </div>

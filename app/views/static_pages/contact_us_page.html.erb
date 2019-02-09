@@ -1,0 +1,42 @@
+<div class="thank-you-page">
+  <h1 class="thank-you content">Contact Us</h1>
+  <div class="columns is-mobile is-centered">
+    <div class="column">
+      <figure class="image">
+        <img src="https://source.unsplash.com/tMI2_-r5Nfo" alt="About WSC">
+      </figure>
+    </div>
+    <div class="column">
+      <div class="box content">
+        <h2 class="title is-2">Williams Specialty Company</h2>
+        <hr>
+        <p>Contact Us if you have any problems with your order or any other question that you!</p>
+        <p>
+          Williams Specialty Company<br/>
+          1221 N Swift Road<br/>
+          Addison, IL 60101<br/>
+          Phone: <a href="tel:630-953-1300">(630) 953-1300</a>
+        </p>
+
+        <hr>
+        <%= form_for Contact.new do |f| %>
+          <div class="field">
+            <%= f.label :name, class: 'label' %>
+            <%= f.text_field :name, class: 'input', required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :email, class: 'label' %>
+            <%= f.text_field :email, type: 'email', class: 'input', required: true %>
+          </div>
+          <div class="field">
+            <%= f.label :comment, class: 'label' %>
+            <%= f.text_area :comment, class: 'textarea' %>
+          </div>
+          <%= f.submit 'Submit', class: 'button is-link' %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
