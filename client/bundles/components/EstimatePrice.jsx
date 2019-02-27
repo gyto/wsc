@@ -109,7 +109,7 @@ class EstimatePrice extends React.Component<Props, State> {
               />
             </header>
             <section className="modal-card-body">
-              <p>Our online instant quote calculator is the best way for you to get a quote for your project. Our WSC IT team built this calculator in-house, which gives us the power to improve upon it constantly. We are always working on ways to add more specialty options and create a better user experience. It can handle all basic book options and a handful of specialty options. To get started you will find the "Calculate Price" button in the upper right hand corner of our website.</p>
+              <p>Our online instant quote calculator is the best way for you to get a quote for your project. Our WSC IT team built this calculator in-house, which gives us the power to improve upon it constantly. We are always working on ways to add more specialty options and create a better user experience. It can handle all basic book options and a handful of specialty options.</p>
               <table
                 className="table is-fullwidth"
               >
