@@ -1,4 +1,7 @@
 # wsc - Williams Specialty Company
+
+**Project is archived**
+
 The Case Project fro DeVry CIS470
 Williams Specialty Company is a company that engraves on many different types of media, depending on their customer’s needs. Currently they do not have an automated system implemented to take orders, this is where we come in. Williams Specialty Company, from now on referred to simply as WSC, has employed us to create an online solution to automate new orders.
 - The system will only let customers with valid usernames and passwords to place an order or enter customer area.
@@ -14,7 +17,6 @@ Williams Specialty Company is a company that engraves on many different types of
   - Specific arrangements for the customers need 
 
 
-## TODO:
-
-- Translation i18n
-- Write Tests
+~~## TODO:~~
+~~- Translation i18n~~
+~~- Write Tests~~
